@@ -23,7 +23,7 @@
     <main class="container-fluid">
     <div class="row store-row">
         <div class="col-md-4">
-            <a class="btn {{'btn-default' if not len(alarms) else 'btn-danger'}} btn-xs"
+            <a class="btn {{'btn-default' if not len(alarms) else 'btn-danger'}} btn-responsive"
                 href="/alarms">Alarms</a>
         </div>
     </div>
@@ -32,21 +32,21 @@
         %if i % 4 == 0:
             <div class="row store-row">
         %end
-        <div class="col-md-3">
+        <div class="col-xs-8 col-xs-offset-2 col-md-3 col-md-offset-0">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-xs-8">
                     <h4>{{store['store_name']}}</h4>
                 </div>
-                <div class="col-md-4">
+                <div class="col-xs-4">
                     <div class="row skinny-row">
                     </div>
                     <div class="row no-margin-b">
-                        <div class="col-md-12 small-font">
+                        <div class="col-xs-12 small-font">
                             <span id="time" class="{{'bg-blink' if store['time_expired'] else ''}}">{{store['last_update_time']}}</span>
                         </div>
                     </div>
                     <div class="row no-margin-b">
-                        <div class="col-md-12 tiny-font">
+                        <div class="col-xs-12 tiny-font">
                             <span id="date" class="{{'bg-blink' if store['date_expired'] else ''}}">{{store['last_update_date']}}</span>
                         </div>
                     </div>
@@ -67,6 +67,7 @@
             %end
             </table>
         </div>
+        <hr class="spacer-25 hidden-md hidden-lg">
         %if i % 4 == 3:
             </div>
         %end

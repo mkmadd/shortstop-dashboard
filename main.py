@@ -203,7 +203,7 @@ def format_stores(rows):
         store['last_update_date'] = earliest['last_updated'].strftime("%b %d, '%y")
         
         # If old date/time, set expired flags
-        if earliest['last_updated'].date() != datetime.today().date():
+        if earliest['last_updated'].date() != (datetime.now() - timedelta(hours=6)).date():
             store['date_expired'] = True
         else:
             store['date_expired'] = False

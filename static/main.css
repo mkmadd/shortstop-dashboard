@@ -39,6 +39,27 @@ h4 {
     font-size: .6em;
 }
 
+@media (max-width: 768px) {
+  .btn-responsive {
+    .btn-xs;
+  }
+}
+
+@media (min-width: 769px) {
+  .btn-responsive {
+    .btn-lg;
+  }
+}
+
+
+
+/* Add some vertical space between columns for xs media */
+hr.spacer-25 {
+  border: 0px solid #000;
+  clear: both;
+  margin: 0 0 25px;
+}
+
 .bg-blink {
     -webkit-animation: blink 1200ms step-start 0s infinite; /* Chrome, Safari, Opera */
     animation: blink 1200ms step-start 0s infinite;
