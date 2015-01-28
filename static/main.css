@@ -31,6 +31,10 @@ h4 {
     font-size: .9em;
 }
 
+.large-font {
+    font-size: 1.2em;
+}
+
 .small-font {
     font-size: .8em;
 }
@@ -38,19 +42,6 @@ h4 {
 .tiny-font {
     font-size: .6em;
 }
-
-@media (max-width: 768px) {
-  .btn-responsive {
-    .btn-xs;
-  }
-}
-
-@media (min-width: 769px) {
-  .btn-responsive {
-    .btn-lg;
-  }
-}
-
 
 
 /* Add some vertical space between columns for xs media */
@@ -67,16 +58,16 @@ hr.spacer-25 {
 
 /* Chrome, Safari, Opera */
 @-webkit-keyframes blink {
-    0% {background: white; color: black;}
+    0% {background: transparent; color: black;}
     50%  {background: red; color: white;}
-    100% {background: white; color: black;}
+    100% {background: transparent; color: black;}
 }
 
 /* Standard syntax */
 @keyframes blink {
-    0% {background: white; color: black;}
+    0% {background: transparent; color: black;}
     50%  {background: red; color: white;}
-    100% {background: white; color: black;}
+    100% {background: transparent; color: black;}
 }
 
 .store-row {

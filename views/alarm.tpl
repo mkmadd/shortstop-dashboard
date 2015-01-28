@@ -9,7 +9,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
-%#    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>    
@@ -21,7 +21,7 @@
     <main class="container-fluid">
         <div class="row store-row">
             <div class="col-md-4">
-                <a class="btn btn-default btn-xs" href='/'>Back</a>
+                <a class="btn btn-default" href='/'>Back</a>
             </div>
             <div class="col-md-4 col-centered"><h4 class="text-center">Active Alarms</h4></div>
         </div>

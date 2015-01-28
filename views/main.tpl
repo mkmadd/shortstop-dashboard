@@ -23,7 +23,7 @@
     <main class="container-fluid">
     <div class="row store-row">
         <div class="col-md-4">
-            <a class="btn {{'btn-default' if not len(alarms) else 'btn-danger'}} btn-responsive"
+            <a class="btn {{'btn-default' if not len(alarms) else 'btn-danger'}}"
                 href="/alarms">Alarms</a>
         </div>
     </div>
@@ -32,7 +32,7 @@
         %if i % 4 == 0:
             <div class="row store-row">
         %end
-        <div class="col-xs-8 col-xs-offset-2 col-md-3 col-md-offset-0">
+        <div class="col-xs-6 col-md-3 col-md-offset-0">
             <div class="row">
                 <div class="col-xs-8">
                     <h4>{{store['store_name']}}</h4>
@@ -52,14 +52,14 @@
                     </div>
                 </div>
             </div>
-            <table style="width:100%">
+            <table class="table large-font">
                 <tr>
                     <th>Volume</th>
                     <th></th>
                     <th>Ullage</th>
                 </tr>
             %for tank in store['tanks']:
-                <tr>
+                <tr class="{{'danger' if tank['tank_low'] else ''}}">
                     <td><span class="{{'bg-blink' if tank['tank_low'] else ''}}">{{tank['gross_volume']}}</span></td>
                     <td>{{'{0} ({1})'.format(tank['tank_name'], tank['product_name'])}}</td>
                     <td>{{tank['ullage']}}</td>
