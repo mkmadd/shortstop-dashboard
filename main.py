@@ -9,11 +9,14 @@ import bottle
 import sys, os
 import re
 import gdata.docs.client, gdata.client
+import logging
 from natsort import natsorted
 from itertools import groupby
 from datetime import datetime, timedelta
 
-ROW_RE = re.compile('<span>(.*?)</span>')
+# had to change from <span> to <span class="c."> when Google docs suddenly 
+# changed.  For some reason the class changes from c0 to c2
+ROW_RE = re.compile(r'<span class="c.">(.*?)</span>')
 ALARM_DOC_NAME = 'Alarm Data' # google doc that stores alarm data
 INV_DOC_NAME = 'Inventory Data' # google doc that stores inventory data
 username = os.environ['GOOG_UID'] # google/gmail login id
@@ -113,19 +116,24 @@ WARNING_LEVELS = {
 
 
 def load_docs():
+#    logging.info('entering load_docs...')
     client = gdata.docs.client.DocsClient(source='shortstop-dash')
     client.ssl= True
     
     try:
         client.ClientLogin(username, password, client.source);
     except (gdata.client.BadAuthentication, gdata.client.Error), e:
-        sys.exit('ERROR: ' + str(e))
+        logging.error('Could not load docs: {}'.format(e))
+#        sys.exit('ERROR: ' + str(e))
     except:
-        sys.exit('ERROR: Unable to login')
+        logging.error('ERROR: Unable to login')
+#        sys.exit('ERROR: Unable to login')
     return client
 
 def retrieve_doc(document_name):
+#    logging.info('entering retrieve_doc...')
     client = load_docs()
+#    logging.info('retrieving resources...')
     doc_list = client.get_resources()
     docs = []
     for i in doc_list.entry:
@@ -138,13 +146,20 @@ def retrieve_doc(document_name):
         return 0
         
     entry = doc_list.entry[doc_num]
+#    logging.info('downloading to memory...')
     content = client.download_resource_to_memory(entry)
     rows = ROW_RE.findall(content)
     new_rows = []
     if rows:
+#        logging.info(rows[0])
         for row in rows:
+            # after fixing <span class...>, had to filter out empty rows
+            if row == '':
+                continue
             new_row = tuple(row.split('|'))
             new_rows.append(new_row)
+    else:
+        logging.error('no rows')
     return new_rows
 
 
@@ -221,9 +236,14 @@ def format_stores(rows):
 @bottle.view('main')
 def main():
     rows = retrieve_doc(INV_DOC_NAME)
+#    logging.info('got rows...')
     rows = natsorted(rows, key=lambda x: x[-1])
+#    logging.info('sorted rows...')
     alarms = retrieve_doc(ALARM_DOC_NAME)
+#    logging.info('got alarms...')
+#    logging.info(rows[:5])
     stores = format_stores(rows)
+#    logging.info('formatted stores...')
     return { 'stores': stores, 'alarms': alarms }
     
 @bottle.route('/alarms')

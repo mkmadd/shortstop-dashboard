@@ -1,2 +1,5 @@
 # contains environmental variables
 app.yaml
+*.pyc
+.spyderproject
+nppBackup/
