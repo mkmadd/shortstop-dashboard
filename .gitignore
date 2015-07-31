@@ -1,5 +1,11 @@
 # contains environmental variables
 app.yaml
+client_secret.json
+shortstop-dash.json
 *.pyc
 .spyderproject
 nppBackup/
+lib/
+natsort/
+gdata/
+atom/
